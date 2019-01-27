@@ -203,10 +203,10 @@
         var bot = [];
         var all = [blank, top, mid, bot];
         var one = hexToInt(hash.toString().substring(0, 6));
-        var two = hexToInt(hash.toString().substring(7, 12));
-        var three = hexToInt(hash.toString().substring(13, 18));
-        var four = hexToInt(hash.toString().substring(19, 24));
-        var five = hexToInt(hash.toString().substring(25, 30));
+        var two = hexToInt(hash.toString().substring(6, 12));
+        var three = hexToInt(hash.toString().substring(12, 18));
+        var four = hexToInt(hash.toString().substring(18, 24));
+        var five = hexToInt(hash.toString().substring(24, 30));
         var allNum = [one, two, three, four, five];
         for (var i = 0; i < allNum.length; i++) {
             for (var j = 0; j < all.length; j++) {
@@ -214,7 +214,6 @@
                 poker.splice(poker[allNum[i] % poker.length], 1);
             }
         }
-      //  console.log(poker.length);
             //庄家
             for (var r = 0; r < all[0].length; r++) {
                 $("#bank"+r).attr('src', './poke/'+all[0][r]+'.png');
@@ -320,13 +319,13 @@
 //sequence: One for each round (banker,top,mid,bot)
 one = hexToInt(hash.substring(0, 6));
 
-two = hexToInt(hash.substring(7, 12));
+two = hexToInt(hash.substring(6, 12));
 
-three = hexToInt(hash.substring(13, 18));
+three = hexToInt(hash.substring(12, 18));
 
-four = hexToInt(hash.substring(19, 24));
+four = hexToInt(hash.substring(18, 24));
 
-five = hexToInt(hash.substring(25, 30));
+five = hexToInt(hash.substring(24, 30));
 
 allPlayer = [banker, top, mid, bot]
 
