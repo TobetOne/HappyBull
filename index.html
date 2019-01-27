@@ -202,11 +202,11 @@
         var mid = [];
         var bot = [];
         var all = [blank, top, mid, bot];
-        var one = Math.abs(hexToInt(hash.toString().substring(0, 6)));
-        var two = Math.abs(hexToInt(hash.toString().substring(7, 12)));
-        var three = Math.abs(hexToInt(hash.toString().substring(13, 18)));
-        var four = Math.abs(hexToInt(hash.toString().substring(19, 24)));
-        var five = Math.abs(hexToInt(hash.toString().substring(25, 30)));
+        var one = hexToInt(hash.toString().substring(0, 6));
+        var two = hexToInt(hash.toString().substring(7, 12));
+        var three = hexToInt(hash.toString().substring(13, 18));
+        var four = hexToInt(hash.toString().substring(19, 24));
+        var five = hexToInt(hash.toString().substring(25, 30));
         var allNum = [one, two, three, four, five];
         for (var i = 0; i < allNum.length; i++) {
             for (var j = 0; j < all.length; j++) {
@@ -214,6 +214,7 @@
                 poker.splice(poker[allNum[i] % poker.length], 1);
             }
         }
+      //  console.log(poker.length);
             //庄家
             for (var r = 0; r < all[0].length; r++) {
                 $("#bank"+r).attr('src', './poke/'+all[0][r]+'.png');
@@ -312,16 +313,45 @@
                 </div>
             </div>
 
-           <!-- <div class="inputDiv">
-                <p class="formulaTitle">公式（formula）：</p>
-                <p class="formula"> hash = SHA256 (Player Signature);</p>
-                <p class="formula"  style="color: #9E9FA2 !important;">//sequence: One for each round (banker,top,mid,bot)</p>
-                <p class="formula"> one = Math.abs(hexToInt(hash.toString().substring(0, 6)));</p>
-                <p class="formula"> two = Math.abs(hexToInt(hash.toString().substring(7, 12)));</p>
-                <p class="formula"> three = Math.abs(hexToInt(hash.toString().substring(13, 18)));</p>
-                <p class="formula"> four = Math.abs(hexToInt(hash.toString().substring(19, 24)));</p>
-                <p class="formula"> five = Math.abs(hexToInt(hash.toString().substring(25, 30)));</p>
-            </div>-->
+            <div class="inputDiv">
+                <pre class="formula">
+公式（formula）：
+
+//sequence: One for each round (banker,top,mid,bot)
+one = hexToInt(hash.substring(0, 6));
+
+two = hexToInt(hash.substring(7, 12));
+
+three = hexToInt(hash.substring(13, 18));
+
+four = hexToInt(hash.substring(19, 24));
+
+five = hexToInt(hash.substring(25, 30));
+
+allPlayer = [banker, top, mid, bot]
+
+eachRound = [one, two, three, four, five];
+
+for (var i = 0; i < allNum.length; i++) {
+
+  for (var j = 0; j < all.length; j++) {
+
+    all[j].push(poker[allNum[i] % poker.length]);
+
+    poker.splice(poker[allNum[i] % poker.length],1);
+
+   }
+}
+
+bankerResult：allPlayer[0]
+
+topResult：allPlayer[1]
+
+midResult：allPlayer[2]
+
+botResult：allPlayer[3]
+                </pre>
+            </div>
         </form>
         <button class="verifyBtn" onclick="getBpResult()">Verify</button>
         <div class="address">
