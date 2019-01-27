@@ -217,15 +217,15 @@
             }
             //上门
             for (var r = 0; r < all[1].length; r++) {
-                $("#top" + r).attr('src', './poke/' + all[0][r] + '.png');
+                $("#top" + r).attr('src', './poke/' + all[1][r] + '.png');
             }
            //天门
             for (var r = 0; r < all[2].length; r++) {
-                $("#mid" + r).attr('src', './poke/' + all[0][r] + '.png');
+                $("#mid" + r).attr('src', './poke/' + all[2][r] + '.png');
             }
             //下门
             for (var r = 0; r < all[3].length; r++) {
-                $("#bot" + r).attr('src', './poke/' + all[0][r] + '.png');
+                $("#bot" + r).attr('src', './poke/' + all[3][r] + '.png');
             }
 
 
@@ -233,8 +233,6 @@
 
     //页面初始化参数
     window.onload = function () {
-        var str = ['s', 'q', 'w', 's', 't', 'd'];
-
         $("#playerSeed").val(GetQueryString('playerSeed'));
         $("#playerSignature").val(GetQueryString('playerSignature'));
         $("#publicKey").val('EOS6CG8VwJ8G1iFn6x781PMojmfD7i4kqqzsgd1AjWwAaEz35QGhn');
@@ -280,7 +278,6 @@
 
             <div class="inputDiv">
                 <p class="inputText">上门（Top Result）:</p>
-                <input class="verInpt" disabled="disabled" id="top"/>
                 <div style="margin-top: 1%">
                     <img id="top0" src="" alt="" height="20px" width="20px" style='vertical-align:bottom'>
                     <img id="top1" src="" alt="" height="20px" width="20px" style='vertical-align:bottom'>
@@ -292,7 +289,6 @@
 
             <div class="inputDiv">
                 <p class="inputText">天门（Mid Result）:</p>
-                <input class="verInpt" disabled="disabled" id="mid"/>
                 <div style="margin-top: 1%">
                     <img id="mid0" src="" alt="" height="20px" width="20px" style='vertical-align:bottom'>
                     <img id="mid1" src="" alt="" height="20px" width="20px" style='vertical-align:bottom'>
@@ -304,7 +300,6 @@
 
             <div class="inputDiv">
                 <p class="inputText">下门（Bot Result）:</p>
-                <input class="verInpt" disabled="disabled" id="Bot"/>
                 <div style="margin-top: 1%">
                     <img id="bot0" src="" alt="" height="20px" width="20px" style='vertical-align:bottom'>
                     <img id="bot1" src="" alt="" height="20px" width="20px" style='vertical-align:bottom'>
@@ -314,12 +309,16 @@
                 </div>
             </div>
 
-            <div class="inputDiv">
+           <!-- <div class="inputDiv">
                 <p class="formulaTitle">公式（formula）：</p>
                 <p class="formula"> hash = SHA256 (Player Signature);</p>
-                <p class="formula">hashCode = Math.abs (hash.hashcode);</p>
-                <p class="formula"> result = hashCode % 100 + 1;</p>
-            </div>
+                <p class="formula"  style="color: #9E9FA2 !important;">//sequence: One for each round (banker,top,mid,bot)</p>
+                <p class="formula"> one = Math.abs(hexToInt(hash.toString().substring(0, 6)));</p>
+                <p class="formula"> two = Math.abs(hexToInt(hash.toString().substring(7, 12)));</p>
+                <p class="formula"> three = Math.abs(hexToInt(hash.toString().substring(13, 18)));</p>
+                <p class="formula"> four = Math.abs(hexToInt(hash.toString().substring(19, 24)));</p>
+                <p class="formula"> five = Math.abs(hexToInt(hash.toString().substring(25, 30)));</p>
+            </div>-->
         </form>
         <button class="verifyBtn" onclick="getBpResult()">Verify</button>
         <div class="address">
