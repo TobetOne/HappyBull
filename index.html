@@ -99,9 +99,17 @@
         .formula {
             margin-top: 1%;
             color: #dadada;
+            font-size: 14px;
         }
         .cardImg {
             width:30px;
+        }
+        .title-p {
+            cursor: pointer;
+
+        }
+        .title-p:hover {
+            color: #ECC214;
         }
 
         @media screen and (max-width: 500px) {
@@ -137,7 +145,7 @@
             }
 
             .formula {
-                font-size: 12px;
+                font-size: 8px;
             }
 
             .verifyBtn {
@@ -156,6 +164,7 @@
 </head>
 
 <script>
+    var  showFlag = true;
     //获取指定参数
     function GetQueryString(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
@@ -164,6 +173,19 @@
         return null;
     }
 
+    function showDivInfo() {
+        //document.getElementById("showDiv").style.display="none";//隐藏
+        if (showFlag){
+            document.getElementById("showDiv").style.display="none";//隐藏
+            showFlag = false;
+        }else {
+
+            document.getElementById("showDiv").style.display="";//显示
+            showFlag=true;
+        }
+
+    }
+    
     function hexToInt(hex) {
         var chs = hex.toLowerCase().toCharArray();
         if (chs.length < 8) {
@@ -201,34 +223,34 @@
         var top = [];
         var mid = [];
         var bot = [];
-        var all = [blank, top, mid, bot];
+        var player = [blank, top, mid, bot];
         var one = hexToInt(hash.toString().substring(0, 6));
         var two = hexToInt(hash.toString().substring(6, 12));
         var three = hexToInt(hash.toString().substring(12, 18));
         var four = hexToInt(hash.toString().substring(18, 24));
         var five = hexToInt(hash.toString().substring(24, 30));
-        var allNum = [one, two, three, four, five];
-        for (var i = 0; i < allNum.length; i++) {
-            for (var j = 0; j < all.length; j++) {
-                all[j].push(poker[allNum[i] % poker.length]);
-                poker.splice(poker[allNum[i] % poker.length], 1);
+        var bout = [one, two, three, four, five];
+        for (var i = 0; i < bout.length; i++) {
+            for (var j = 0; j < player.length; j++) {
+                player[j].push(poker[bout[i] % poker.length]);
+                poker.splice(bout[i] % poker.length, 1);
             }
         }
             //庄家
-            for (var r = 0; r < all[0].length; r++) {
-                $("#bank"+r).attr('src', './poke/'+all[0][r]+'.png');
+            for (var r = 0; r < player[0].length; r++) {
+                $("#bank"+r).attr('src', './poke/'+player[0][r]+'.png');
             }
             //上门
-            for (var r = 0; r < all[1].length; r++) {
-                $("#top" + r).attr('src', './poke/' + all[1][r] + '.png');
+            for (var r = 0; r < player[1].length; r++) {
+                $("#top" + r).attr('src', './poke/' + player[1][r] + '.png');
             }
            //天门
-            for (var r = 0; r < all[2].length; r++) {
-                $("#mid" + r).attr('src', './poke/' + all[2][r] + '.png');
+            for (var r = 0; r < player[2].length; r++) {
+                $("#mid" + r).attr('src', './poke/' + player[2][r] + '.png');
             }
             //下门
-            for (var r = 0; r < all[3].length; r++) {
-                $("#bot" + r).attr('src', './poke/' + all[3][r] + '.png');
+            for (var r = 0; r < player[3].length; r++) {
+                $("#bot" + r).attr('src', './poke/' + player[3][r] + '.png');
             }
 
 
@@ -268,54 +290,60 @@
             </div>
 
             <div class="inputDiv">
-                <p class="inputText">庄家结果（Banker Result）:</p>
-                <div style="margin-top: 2%">
-                    <img id="bank0" class='cardImg' src="" alt="" style='vertical-align:bottom'>
-                    <img id="bank1" class='cardImg' src="" alt="" style='vertical-align:bottom'>
-                    <img id="bank2" class='cardImg' src="" alt="" style='vertical-align:bottom'>
-                    <img id="bank3" class='cardImg' src="" alt="" style='vertical-align:bottom'>
-                    <img id="bank4" class='cardImg' src="" alt="" style='vertical-align:bottom'>
+                <div style="text-align: center">
+                    <table border="1" class="formula" width="100%">
+                        <tr >
+                            <td width="35%" >玩家（Player）</td>
+                            <td >结果（Result）</td>
+                        </tr>
+                       <tr>
+                           <td width="35%">庄家（Banker）</td>
+                           <td>
+                               <img id="bank0" class='cardImg' src="" alt="" style='vertical-align:bottom'>
+                               <img id="bank1" class='cardImg' src="" alt="" style='vertical-align:bottom'>
+                               <img id="bank2" class='cardImg' src="" alt="" style='vertical-align:bottom'>
+                               <img id="bank3" class='cardImg' src="" alt="" style='vertical-align:bottom'>
+                               <img id="bank4" class='cardImg' src="" alt="" style='vertical-align:bottom'>
+                           </td>
+                       </tr>
+                       <tr>
+                           <td width="30%">上门（Top）</td>
+                           <td> <img id="top0" class='cardImg' src="" alt="" style='vertical-align:bottom'>
+                               <img id="top1" class='cardImg' src="" alt="" style='vertical-align:bottom'>
+                               <img id="top2" class='cardImg' src="" alt="" style='vertical-align:bottom'>
+                               <img id="top3" class='cardImg' src="" alt="" style='vertical-align:bottom'>
+                               <img id="top4" class='cardImg' src="" alt="" style='vertical-align:bottom'>
+                           </td>
+                       </tr>
+                       <tr>
+                           <td width="30%">天门（Mid）</td>
+                           <td>
+                               <img id="mid0" class='cardImg' src="" alt="" style='vertical-align:bottom'>
+                               <img id="mid1" class='cardImg' src="" alt="" style='vertical-align:bottom'>
+                               <img id="mid2" class='cardImg' src="" alt="" style='vertical-align:bottom'>
+                               <img id="mid3" class='cardImg' src="" alt="" style='vertical-align:bottom'>
+                               <img id="mid4" class='cardImg' src="" alt="" style='vertical-align:bottom'>
+                           </td>
+                       </tr>
+                       <tr>
+                           <td width="30%">下门（Bot）</td>
+                           <td>
+                               <img id="bot0" class='cardImg' src="" alt="" style='vertical-align:bottom'>
+                               <img id="bot1" class='cardImg' src="" alt="" style='vertical-align:bottom'>
+                               <img id="bot2" class='cardImg' src="" alt="" style='vertical-align:bottom'>
+                               <img id="bot3" class='cardImg' src="" alt="" style='vertical-align:bottom'>
+                               <img id="bot4" class='cardImg' src="" alt="" style='vertical-align:bottom'>
+                           </td>
+                       </tr>
+                    </table>
                 </div>
-
             </div>
 
             <div class="inputDiv">
-                <p class="inputText">上门（Top Result）:</p>
-                <div style="margin-top: 2%">
-                    <img id="top0" class='cardImg' src="" alt="" style='vertical-align:bottom'>
-                    <img id="top1" class='cardImg' src="" alt="" style='vertical-align:bottom'>
-                    <img id="top2" class='cardImg' src="" alt="" style='vertical-align:bottom'>
-                    <img id="top3" class='cardImg' src="" alt="" style='vertical-align:bottom'>
-                    <img id="top4" class='cardImg' src="" alt="" style='vertical-align:bottom'>
-                </div>
+               <p class="formula title-p" onclick="showDivInfo()">公式（Show Formula）： </p>
             </div>
-
-            <div class="inputDiv">
-                <p class="inputText">天门（Mid Result）:</p>
-                <div style="margin-top: 2%">
-                    <img id="mid0" class='cardImg' src="" alt="" style='vertical-align:bottom'>
-                    <img id="mid1" class='cardImg' src="" alt="" style='vertical-align:bottom'>
-                    <img id="mid2" class='cardImg' src="" alt="" style='vertical-align:bottom'>
-                    <img id="mid3" class='cardImg' src="" alt="" style='vertical-align:bottom'>
-                    <img id="mid4" class='cardImg' src="" alt="" style='vertical-align:bottom'>
-                </div>
-            </div>
-
-            <div class="inputDiv">
-                <p class="inputText">下门（Bot Result）:</p>
-                <div style="margin-top: 2%">
-                    <img id="bot0" class='cardImg' src="" alt="" style='vertical-align:bottom'>
-                    <img id="bot1" class='cardImg' src="" alt="" style='vertical-align:bottom'>
-                    <img id="bot2" class='cardImg' src="" alt="" style='vertical-align:bottom'>
-                    <img id="bot3" class='cardImg' src="" alt="" style='vertical-align:bottom'>
-                    <img id="bot4" class='cardImg' src="" alt="" style='vertical-align:bottom'>
-                </div>
-            </div>
-
-            <div class="inputDiv">
+            <div class="inputDiv" id="showDiv">
                 <pre class="formula">
-公式（formula）：
-
 //sequence: One for each round (banker,top,mid,bot)
 one = hexToInt(hash.substring(0, 6));
 
@@ -327,28 +355,28 @@ four = hexToInt(hash.substring(18, 24));
 
 five = hexToInt(hash.substring(24, 30));
 
-allPlayer = [banker, top, mid, bot]
+player = [banker, top, mid, bot]
 
-eachRound = [one, two, three, four, five];
+bout = [one, two, three, four, five];
 
-for (var i = 0; i < allNum.length; i++) {
+for (var i = 0; i < bout.length; i++) {
 
-  for (var j = 0; j < all.length; j++) {
+  for (var j = 0; j < player.length; j++) {
 
-    all[j].push(poker[allNum[i] % poker.length]);
+    player[j].push(poker[bout[i] % poker.length]);
 
-    poker.splice(poker[allNum[i] % poker.length],1);
+    poker.splice(bout[i] % poker.length, 1);
 
-      }
-  }
+        }
+   }
 
-bankerResult：allPlayer[0]
+bankerResult：player[0]
 
-topResult：allPlayer[1]
+topResult：player[1]
 
-midResult：allPlayer[2]
+midResult：player[2]
 
-botResult：allPlayer[3]
+botResult：player[3]
                 </pre>
             </div>
         </form>
