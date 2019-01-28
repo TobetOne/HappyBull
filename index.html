@@ -179,7 +179,6 @@
             document.getElementById("showDiv").style.display="none";//隐藏
             showFlag = false;
         }else {
-
             document.getElementById("showDiv").style.display="";//显示
             showFlag=true;
         }
@@ -258,6 +257,7 @@
 
     //页面初始化参数
     window.onload = function () {
+        showDivInfo();
         $("#playerSeed").val(GetQueryString('playerSeed'));
         $("#playerSignature").val(GetQueryString('playerSignature'));
         $("#publicKey").val('EOS6CG8VwJ8G1iFn6x781PMojmfD7i4kqqzsgd1AjWwAaEz35QGhn');
