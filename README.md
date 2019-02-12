@@ -5,7 +5,7 @@
 在使用此网页工具之前，请仔细阅读以下说明。你可以根据如下说明，自行开发程序验证。
 ## 开奖结果计算
   1. 根据游戏数据生成随机种子,并签名：  
-    seed = GameId+BetPlayersCount+LastBetTime;  
+    seed = GameId+BetPlayersCount+PayTotalAmount+LastBetTime;  
     seed_sign = sign(seed)  
   2. 对随机种子hash（SH256）运算，结果转换为16进制  
     hash_hex = hex(sha256(seed_sign))  
