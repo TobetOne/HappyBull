@@ -52,9 +52,10 @@ midResult：player[2]
 botResult：player[3]
 ```
 ## 随机因子说明
-   seed = GameId+BetPlayersCount+LastBetTime
+   seed = GameId+BetPlayersCount+PayTotalAmount+LastBetTime
 *  GameId:游戏ID
 *  BetPlayersCount:参与游戏玩家个数
+*  PayTotalAmount:投注总额
 *  LastBetTime:最后一位投注的玩家的投注时间
 ## 签名验证
    验证签名使用Tobet的公钥（EOS6CG8VwJ8G1iFn6x781PMojmfD7i4kqqzsgd1AjWwAaEz35QGhn），对seed_sign进行ecc签名验证，验证结果通过即可证明随机种子未被篡改。
